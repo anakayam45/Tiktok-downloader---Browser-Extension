@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "Tiktok downloader",
+  "version": "1.0",
+  "description": "",
+  "permissions": [
+  "tabs",
+  "scripting",
+  "activeTab",
+  "webNavigation",
+  "storage",
+  "downloads"
+],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": {
+      "32": "icon.jpg"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.tiktok.com/player/*"
+      ],
+      "js": ["script.js"]
+    }
+  ],
+  "host_permissions": [
+    "https://www.tiktok.com/*"
+  ]
+}
