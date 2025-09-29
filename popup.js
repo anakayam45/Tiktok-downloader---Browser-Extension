@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const videoId = match[1];
         statusText.textContent = `🎥 Video ID: ${videoId}`;
 
+        // Mengecek apakah video ini sudah pernah diunduh sebelumnya
         chrome.storage.local.get(["downloadedIds", "lastLog"], (data) => {
             const downloadedIds = data.downloadedIds || [];
             if (downloadedIds.includes(videoId)) {
@@ -28,8 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
             logText.textContent = data.lastLog ?? "Belum ada aktivitas.";
         });
 
-        // Tombol unduh manual (selalu aktif)
+        // Alur download video ==> user mengklik tombol download - 001
+        // tombol ini akan selalu aktig
         downloadBtn.addEventListener("click", () => {
+            // mengirim pesan berupa id video ke background.js - 002
             chrome.runtime.sendMessage({ action: "downloadVideo", videoId });
         });
 
